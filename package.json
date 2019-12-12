@@ -1,15 +1,27 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "A note taking application using Node Express",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
+  "author": "billson",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "mysql": "^2.16.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamWhite86/NoteTaker.git"
+  },
+  "keywords": [
+    "notes"
+  ],
+  "bugs": {
+    "url": "https://github.com/WilliamWhite86/NoteTaker/issues"
+  },
+  "homepage": "https://github.com/WilliamWhite86/NoteTaker#readme"
 }

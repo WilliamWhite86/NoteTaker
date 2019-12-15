@@ -39,17 +39,23 @@ module.exports = function (app) {
   app.post("/api/notes", function (req, res) {
     fs.readFile(path.join(__dirname, "../db/db.json"), (err, data) => {
       if (err) throw err;
+      let newNote = req.body;
+      let id = Math.floor(Math.random() * 1000);  
       let notesObj = (JSON.parse(data));
-      notesObj.push(req.body);
-      let notesString = JSON.stringify(notesObj);
+      newNote.id = id;
+      notesObj.push(newNote);
+        //req.body + `{"id":"${id}"}`);
+      let notesString = JSON.stringify(notesObj) ;
       console.log(typeof notesString);
       fs.writeFileSync(path.join(__dirname, "../db/db.json"), notesString)
-      
-
     });      
-    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-    // req.body is available since we're using the body parsing middleware
-    //console.log(req.body)
-    //notesData.push(req.body);
   });
+
+  app.delete("/api/notes", function (req, res) {
+    fs.readFile(path.join(__dirname, "../db/db/json"), (err, data) => {
+      if (err) throw err;
+      console.log(req.body);
+      let notesOBJ = (JSON.parse(data));
+    })
+  })
 };

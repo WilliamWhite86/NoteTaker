@@ -41,21 +41,28 @@ module.exports = function (app) {
       if (err) throw err;
       let newNote = req.body;
       let id = Math.floor(Math.random() * 1000);  
-      let notesObj = (JSON.parse(data));
-      newNote.id = id;
-      notesObj.push(newNote);
+      let notesArr = (JSON.parse(data));
+      newArr.id = id;
+      notesArr.push(newNote);
         //req.body + `{"id":"${id}"}`);
-      let notesString = JSON.stringify(notesObj) ;
+      let notesString = JSON.stringify(notesArr);
       console.log(typeof notesString);
       fs.writeFileSync(path.join(__dirname, "../db/db.json"), notesString)
     });      
   });
 
-  app.delete("/api/notes", function (req, res) {
-    fs.readFile(path.join(__dirname, "../db/db/json"), (err, data) => {
+  app.delete("/api/notes/:id", function (req, res) {
+    fs.readFile(path.join(__dirname, "../db/db.json"), (err, data) => {
       if (err) throw err;
-      console.log(req.body);
-      let notesOBJ = (JSON.parse(data));
-    })
+      console.log(req.params.id);
+      //console.log(JSON.parse(data));
+      let notesArr = (JSON.parse(data));
+      let newNotesArr = []
+      for (i = 0; i < notesArr.length; i++){
+        if (notesArr[i].id !== req.params.id){
+          newNotesArr.push(notesArr[i]);
+        }
+    }
+    console.log(newNotesArr);
   })
-};
+})};
